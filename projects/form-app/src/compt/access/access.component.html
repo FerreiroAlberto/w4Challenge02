@@ -1,0 +1,52 @@
+<nav>
+  <a [routerLink]="['/personal']" routerLinkActive="router-link-active"
+    >Anterior</a
+  >
+  <a [routerLink]="['/confirmation']" routerLinkActive="router-link-active"
+    >Siguiente</a
+  >
+</nav>
+
+<form #form #accessForm="ngForm" (ngSubmit)="onSubmit($event)">
+  <div>
+    <label for="username">Usuario:</label>
+    <input type="text" name="username" required ngModel />
+    @if ( accessForm.form.controls["username"].touched &&
+    accessForm.form.controls["username"].invalid ) { @if
+    (accessForm.form.controls["username"].errors?.["required"]) {
+    <p>El nombre es obligatorio</p>
+    }}
+  </div>
+
+  <div>
+    <label for="password">Contraseña:</label>
+    <input type="password" name="password" required ngModel />
+
+    @if ( accessForm.form.controls["password"].touched &&
+    accessForm.form.controls["password"].invalid ) { @if
+    (accessForm.form.controls["password"].errors?.["required"]) {
+    <p>Este campo es obligatorio</p>
+    }}
+
+    <label for="repeatPassword">Repita contraseña:</label>
+    <input type="password" name="repeatPassword" required ngModel />
+  </div>
+
+  <div>
+    <label for="accountType">Tipo de cuenta:</label>
+    <select name="accountType" required ngModel>
+      <option value="">Selecciones tipo de cuenta</option>
+      <option value="personal">Personal</option>
+      <option value="pro">Pro</option>
+      <option value="business">Business</option>
+    </select>
+  </div>
+  <div>
+    <ul>
+      <li>{{ this.userData?.username }}</li>
+      <li>{{ this.userData?.accountType }}</li>
+      <li>{{ this.userData?.password }}</li>
+    </ul>
+  </div>
+  <button type="submit" [disabled]="accessForm.invalid">Enviar</button>
+</form>

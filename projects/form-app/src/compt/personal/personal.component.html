@@ -1,0 +1,67 @@
+<nav>
+  <a [routerLink]="['/access']" routerLinkActive="router-link-active"
+    >Siguiente</a
+  >
+</nav>
+
+<form #form #personalForm="ngForm" (ngSubmit)="onSubmit($event)">
+  <div>
+    <label for="name">Nombre:</label>
+    <input type="text" name="name" required ngModel />
+    @if ( personalForm.form.controls["name"].touched &&
+    personalForm.form.controls["name"].invalid ) { @if
+    (personalForm.form.controls["name"].errors?.["required"]) {
+    <p>El nombre es obligatorio</p>
+    }}
+  </div>
+  <div>
+    <label for="surname">Apellido:</label>
+    <input type="text" name="surname" required ngModel />
+    @if ( personalForm.form.controls["surname"].touched &&
+    personalForm.form.controls["surname"].invalid ) { @if
+    (personalForm.form.controls["surname"].errors?.["required"]) {
+    <p>El apellido es obligatorio</p>
+    }}
+  </div>
+  <div>
+    <label for="birthdate">Fecha de nacimiento:</label>
+    <input type="date" name="birthdate" ngModel />
+  </div>
+
+  <div>
+    <p>Género:</p>
+    <input type="radio" name="radioGroup" value="male" ngModel />
+    <label for="option1">Hombre</label>
+    <input type="radio" name="radioGroup" value="female" ngModel />
+    <label for="option2">Mujer</label>
+    <input type="radio" name="radioGroup" value="other" ngModel />
+    <label for="option3">Otro</label>
+    <input type="radio" name="radioGroup" value="no-tell" ngModel />
+    <label for="option4">Prefiero no decirlo</label>
+  </div>
+
+  <div>
+    <label for="email">Email:</label>
+    <input type="email" name="email" required ngModel />
+  </div>
+
+  <div>
+    <p>Apúntate a nuestra newsletter</p>
+    <input type="checkbox" name="newsletter" value="Sí" ngModel />
+    <label for="accept">Sí</label>
+    <input type="checkbox" name="newsletterAccept" value="No" ngModel />
+    <label for="rejcts">No</label>
+  </div>
+  <div>
+    <ul>
+      <li>{{ this.userData?.name }}</li>
+      <li>{{ this.userData?.surname }}</li>
+      <li>{{ this.userData?.birthdate }}</li>
+      <li>{{ this.userData?.radioGroup }}</li>
+      <li>{{ this.userData?.email }}</li>
+      <li>{{ this.userData?.birthdate }}</li>
+    </ul>
+  </div>
+
+  <input type="submit" value="Submit" />
+</form>
