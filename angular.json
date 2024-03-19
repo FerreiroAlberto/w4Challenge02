@@ -3,5 +3,108 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
+    "FormApp": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "projects/form-app",
+      "sourceRoot": "projects/form-app/src",
+      "prefix": "isdi",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:application",
+          "options": {
+            "outputPath": "dist/form-app",
+            "index": "projects/form-app/src/index.html",
+            "browser": "projects/form-app/src/main.ts",
+            "polyfills": [
+              "zone.js"
+            ],
+            "tsConfig": "projects/form-app/tsconfig.app.json",
+            "assets": [
+              "projects/form-app/src/favicon.ico",
+              "projects/form-app/src/assets"
+            ],
+            "styles": [
+              "projects/form-app/src/styles.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "buildTarget": "FormApp:build:production"
+            },
+            "development": {
+              "buildTarget": "FormApp:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "buildTarget": "FormApp:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ],
+            "tsConfig": "projects/form-app/tsconfig.spec.json",
+            "assets": [
+              "projects/form-app/src/favicon.ico",
+              "projects/form-app/src/assets"
+            ],
+            "styles": [
+              "projects/form-app/src/styles.css"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/form-app/**/*.ts",
+              "projects/form-app/**/*.html"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "analytics": "45371133-476f-4f76-9c60-644a64d17b17",
+    "schematicCollections": [
+      "@angular-eslint/schematics"
+    ]
   }
 }
